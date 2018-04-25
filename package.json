@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom",
-    
+    "test": "react-scripts test --env=jsdom"  
   },
   "author": "",
   "license": "ISC",

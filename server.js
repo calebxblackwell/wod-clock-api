@@ -1,8 +1,5 @@
 const express = require('express');
 const app = express();
-
-const PORT = process.env.PORT || 3000;
-
 const cors = require('cors');
 const {CLIENT_ORIGIN} = require('./config');
 const config = require('./config');
@@ -29,12 +26,39 @@ passport.use(jwtStrategy);
 app.get('/api/programs', (req,res) => {
   res.json({programs: yes});
 })
-
-//below is info to run the server
 app.get('/api/*', (req, res) => {
   res.json({ok: true});
 });
+//below is info to run the server
+function runServer() {
+	const port = process.env.PORT || 8080;
+	return new Promise((resolve, reject) => {
+		server = app.listen(port, () => {
+			console.log(`Your app is listening on port ${8080}`);
+			resolve(server);
+		}).on('error', err => {
+			reject(err);
+		});
+	});
+}
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-
-module.exports = {app};
+function closeServer() {
+	return new Promise((resolve, reject) => {
+		console.log('Closing server');
+		server.close(err => {
+			if (err) {
+				reject(err);
+				return;
+			}
+			resolve();
+		});
+	});
+}
+if (require.main === module) {
+	runServer().catch(err => console.error(err));
+}
+module.exports = {
+	runServer,
+	app,
+	closeServer
+};

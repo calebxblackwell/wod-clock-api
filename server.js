@@ -22,7 +22,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //endpoints!!!
-//when i have the api key, line 27 will show a json object with program info
+//line 27 will show a json object with program info
 app.get('/api/programs', (req,res) => {
   res.json({programs: yes});
 })

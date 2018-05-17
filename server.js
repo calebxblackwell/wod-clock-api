@@ -29,7 +29,7 @@ app.get('/api/programs', (req,res) => {
 //
 let server;
 //creating a new user
-app.post('/user', (req, res) => {
+app.post('/users', (req, res) => {
 	let {
 		username,
 		password
@@ -83,7 +83,7 @@ const createAuthToken = function(user) {
 const localAuth = passport.authenticate('local', {
 	session: false
 });
-app.post('/users/signin', localAuth, (req, res) => {
+app.post('/users/authenticate', localAuth, (req, res) => {
 	const authToken = createAuthToken(req.user.serialize());
 	res.json({
 		authToken,

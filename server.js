@@ -29,7 +29,7 @@ app.get('/api/programs', (req,res) => {
 //
 let server;
 //creating a new user
-app.post('/users', (req, res) => {
+app.post('/users/authenticate', (req, res) => {
 	let {
 		username,
 		password
